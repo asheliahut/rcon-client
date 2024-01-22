@@ -8,7 +8,7 @@ describe("encodePacket", () => {
     //                                  id      |    type   |  payload  |  padding
     const bufferB = Buffer.from("\x0f\x00\x00\x00\x03\x00\x00\x00payload\x00\x00")
 
-    expect(buffer.slice(4)).toEqual(bufferB)
+    expect(buffer.subarray(4)).toEqual(bufferB)
   })
 })
 

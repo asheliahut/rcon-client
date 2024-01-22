@@ -7,10 +7,11 @@ export interface Packet {
 export function encodePacket(packet: Packet): Buffer {
     const buffer = Buffer.alloc(packet.payload.length + 14)
 
-    buffer.writeInt32LE(packet.payload.length + 10, 0)
+    buffer.writeInt32LE(packet.payload.length - 4, 0)
     buffer.writeInt32LE(packet.id, 4)
     buffer.writeInt32LE(packet.type, 8)
     packet.payload.copy(buffer, 12)
+    buffer.writeInt16LE(0, packet.payload.length - 2);
 
     return buffer
 }
@@ -19,7 +20,7 @@ export function decodePacket(buffer: Buffer): Packet {
     const length = buffer.readInt32LE(0)
     const id = buffer.readInt32LE(4)
     const type = buffer.readInt32LE(8)
-    const payload = buffer.slice(12, length + 2)
+    const payload = buffer.subarray(12, length - 2)
 
     return {
         id, type, payload

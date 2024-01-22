@@ -24,11 +24,11 @@
     "author": "Janis Pritzkau <janispritzkau@gmail.com>",
     "license": "MIT",
     "dependencies": {
-        "typed-emitter": "^0.1.0"
+        "typed-emitter": "^2.1.0"
     },
     "devDependencies": {
-        "@types/node": "^10.14.20",
+        "@types/node": "^20.11.5",
         "jasmine": "^3.5.0",
-        "typescript": "^3.6.3"
+        "typescript": "^5.3.3"
     }
 }

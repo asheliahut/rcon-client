@@ -1,5 +1,5 @@
 import { Socket, connect } from "net"
-import TypedEmitter from "typed-emitter"
+import TypedEmitter, { EventMap } from "typed-emitter"
 
 import { decodePacket, encodePacket, PacketType, Packet } from "./packet"
 import { createSplitter } from "./splitter"
@@ -50,7 +50,7 @@ export class Rcon {
 
     config: Required<RconOptions>
 
-    emitter = new EventEmitter() as TypedEmitter<Events>
+    emitter = new EventEmitter() as TypedEmitter<EventMap>
     socket: Socket | null = null
     authenticated = false
 
@@ -76,7 +76,7 @@ export class Rcon {
         })
 
         try {
-            await new Promise((resolve, reject) => {
+            await new Promise<void>((resolve, reject) => {
                 socket.once("error", reject)
                 socket.on("connect", () => {
                     socket.off("error", reject)
