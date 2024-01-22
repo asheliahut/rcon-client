@@ -141,8 +141,8 @@ export class Rcon {
       @returns A promise that will be resolved with the command's response from the server.
     */
     async send(command: string) {
-        const payload = await this.sendRaw(Buffer.from(command, "utf-8"))
-        return payload.toString("utf-8")
+        const payload = await this.sendRaw(Buffer.from(command, "ascii"))
+        return payload.toString("ascii")
     }
 
     async sendRaw(buffer: Buffer) {
